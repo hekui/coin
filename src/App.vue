@@ -4,6 +4,7 @@
       <el-button @click="navHandle('')" :type="nav === '' ? 'primary' : ''">收集</el-button>
       <el-button @click="navHandle('btc114')" :type="nav === 'btc114' ? 'primary' : ''">BTC/LTC行情(btc114)</el-button>
       <el-button @click="dialogTradeListVisible = true">持有币</el-button>
+      <el-button @click="showTradeEdit">添加交易</el-button>
     </div>
     <div>
       <el-dialog title="持有币" size="large" :visible.sync="dialogTradeListVisible">
@@ -38,6 +39,7 @@
       </el-dialog>
     </div>
     <router-view></router-view>
+    <tradeEdit></tradeEdit>
   </div>
 </template>
 
@@ -45,6 +47,7 @@
 import Vue from 'vue'
 import moment from 'moment'
 import {mapState, mapGetters} from 'vuex'
+import tradeEdit from './components/User/tradeEdit'
 export default {
   name: 'app',
   data () {
@@ -70,6 +73,12 @@ export default {
     initCoin: function () {
       this.$store.commit('SET_CONINCNNAME')
     },
+    showTradeEdit: function () {
+      this.$store.commit('SET', {
+        target: 'dialogTradeListVisible',
+        data: true
+      })
+    },
     navHandle: function (type) {
       this.nav = type
       if (type === '') {
@@ -85,8 +94,11 @@ export default {
     },
     formatDate (row, column, cellValue) {
       // console.log('moment', )
-      return moment(cellValue).format('YYYY-MM-DD HH:mm')
+      return moment(cellValue).format('MM-DD HH:mm')
     }
+  },
+  components: {
+    tradeEdit
   }
 }
 </script>

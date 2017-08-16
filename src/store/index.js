@@ -8,6 +8,7 @@ import coinvcCoinName from './coinvc_coinNme'
 
 Vue.use(Vuex)
 
+const SET = 'SET'
 const SET_CHOSENCOINLIST = 'SET_CHOSENCOINLIST'
 const SET_CHOSENUNITCOIN = 'SET_CHOSENUNITCOIN'
 const GET_JUBI_COIN = 'GET_JUBI_COIN'
@@ -98,7 +99,9 @@ export default new Vuex.Store({
       }
     },
     // coinvc market
-    coinvcMarket: []
+    coinvcMarket: [],
+    // user
+    dialogTradeListVisible: false
   },
   getters: {
     getMarket: state => {
@@ -176,6 +179,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    [SET] (state, object) {
+      state[object.target] = object.data
+    },
     [SET_CHOSENUNITCOIN] (state, name) {
       state.chosenUnitCoin = name
     },

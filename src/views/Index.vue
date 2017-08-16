@@ -230,8 +230,8 @@
           :key="key"
           :label="key"
           :value="key">
-          <span style="float: left">{{ val }}</span>
-          <span style="float: right; color: #8492a6; font-size: 13px">{{ key }}</span>
+          <span class="fl">{{ val }}</span>
+          <span class="fr" style=" color: #8492a6; font-size: 13px">{{ key }}</span>
         </el-option>
       </el-select>
     </div>

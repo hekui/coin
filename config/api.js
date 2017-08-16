@@ -14,7 +14,7 @@ var connConfig = {
 // tradeList
 router.get('/user/trade_list', function(req, res){
   let conn = mysql.createConnection(connConfig);
-  let sql = 'select * from v_user_trade_list'
+  let sql = 'select * from v_user_trade_list where status = 1'
   conn.connect();
   let result = conn.query(sql, function (error, results, fields) {
     // console.log('results', results);
