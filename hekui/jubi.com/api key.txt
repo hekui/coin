@@ -1,0 +1,7 @@
+Api Key
+聚币网将不会保存您的私钥，一旦丢失将不能找回
+名称：	13982271436
+权限：	全部权限
+公钥：	e7cwa-7s1v4-cbymk-b1x54-4tuee-u37rd-u5k62
+私钥：	%v,^i-^mK@}-dc{8n-~f6.N-ERSTx-5FIQT-LH4wz
+确定
