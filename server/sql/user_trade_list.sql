@@ -50,3 +50,4 @@ INSERT INTO `user_trade_list` VALUES ('11', '1', '10000', '7', '1', '976.2337', 
 INSERT INTO `user_trade_list` VALUES ('12', '1', '10000', '11', '1', '89.572', '10.9', null, '2017/8/17 12:45', null);
 INSERT INTO `user_trade_list` VALUES ('13', '1', '10000', '53', '2', '190', '1.6', null, '2017-08-14 14:42:11', null);
 INSERT INTO `user_trade_list` VALUES ('14', '2', '10000', '9', '1', '126432.117', '0.0695', null, '2017/8/17 13:13', null);
+INSERT INTO `user_trade_list` VALUES ('15', '1', '10000', '6', '1', '289.4800', '7.6', null, '2017/8/17 20:40', null);
