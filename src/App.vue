@@ -3,7 +3,7 @@
     <div>
       <el-button @click="navHandle('')" :type="nav === '' ? 'primary' : ''">收集</el-button>
       <el-button @click="navHandle('btc114')" :type="nav === 'btc114' ? 'primary' : ''">BTC/LTC行情(btc114)</el-button>
-      <el-button @click="dialogTradeListVisible = true">持有币</el-button>
+      <el-button @click="dialogTradeListVisible = true">我的现有资产</el-button>
       <el-button @click="showTradeEdit">添加交易</el-button>
     </div>
     <div>
@@ -16,8 +16,8 @@
         <el-table
           :data="myTradeList"
           style="width: 100%">
-          <el-table-column property="buy_time" label="购入日期" width="180" :formatter="formatDate"></el-table-column>
-          <el-table-column property="name" label="币种">
+          <el-table-column property="buy_time" label="购入日期" width="120" :formatter="formatDate"></el-table-column>
+          <el-table-column sortable property="name" label="币种">
             <template scope="scope">
               {{scope.row.name}} <span class="gray">{{scope.row.enName.toString().toUpperCase()}}</span>
             </template>
@@ -35,6 +35,7 @@
               <span v-else class="green">{{(scope.row.curWorth - (scope.row.buy_price*scope.row.count)) |　formatMoney}}</span>
             </template>
           </el-table-column>
+          <el-table-column property="market_name" label="交易所"></el-table-column>
         </el-table>
       </el-dialog>
     </div>
