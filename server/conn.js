@@ -1,9 +1,35 @@
-var mysql = require('mysql');
-
-var conn = mysql.createConnection({
+let mysql = require('mysql');
+let connConfig = {
   host     : 'localhost',
   user     : 'root',
   password : '',
   database : 'btc'
-});
-conn.connect();
+}
+let pool = mysql.createPool(connConfig)
+
+function connPool(sql, callback){
+  pool.getConnection((error, conn) => {
+    conn.query(sql, function (error, results, fields) {
+      conn.release();
+      if (error) {
+        console.log('---error:sql query------------------------------------------------------');
+        console.log('sql:', sql);
+        throw error;
+        callback({
+          status: 1,
+          msg: '有sql查询错误发生。',
+          data: results
+        })
+      } else {
+        callback({
+          status: 0,
+          data: results
+        })
+      }
+    });
+  })
+}
+
+module.exports = {
+  pool: connPool
+}

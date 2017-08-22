@@ -22,11 +22,18 @@
         </el-form-item>
         <el-form-item label="买/卖">
           <el-select v-model="form.tradeType">
-            <el-option label="买入" value="buy"></el-option>
-            <el-option label="卖出" value="sell"></el-option>
+            <el-option label="买入" :value="0"></el-option>
+            <el-option label="卖出" :value="1"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="价格">
+        <el-form-item label="状态">
+          <el-select v-model="form.tradeStatus">
+            <el-option label="挂单中" :value="0"></el-option>
+            <el-option label="交易成功" :value="1"></el-option>
+            <el-option label="撤销" :value="4"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="单价">
           <el-input v-model="form.price" placeholder="请输入,支持小数点后6位"></el-input>
         </el-form-item>
         <el-form-item label="数量">
@@ -50,7 +57,8 @@ export default {
       form: {
         market: 1,
         coinId: '',
-        tradeType: 'buy',
+        tradeType: 0,
+        tradeStatus: 1,
         price: '',
         count: ''
       }
@@ -71,7 +79,8 @@ export default {
       })
     },
     submitTradeEdit () {
-      this.submitLoading = true
+      // this.submitLoading = true
+      console.log(JSON.stringify(this.form))
       // this.$store.dispatch('', this.form).then(res => {
       //   this.submitLoading = false
       //   this.$store.commit('SET', {

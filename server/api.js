@@ -1,30 +1,24 @@
 var express = require('express')
 var router = express.Router();
 var request = require('request');
+var conn = require('./conn')
 
-var mysql = require('mysql');
-var connConfig = {
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'btc'
-}
 
 // 路由配置
+// coins
+router.get('/coins', (req, res) => {
+  let sql = 'select id,name,enName from coin_list order by id asc'
+  conn.pool(sql, (result) => {
+    res.json(result)
+  })
+})
+
 // tradeList
 router.get('/user/trade_list', function(req, res){
-  let conn = mysql.createConnection(connConfig);
   let sql = 'select * from v_user_trade_list where status = 1 order by buy_time asc'
-  conn.connect();
-  let result = conn.query(sql, function (error, results, fields) {
-    // console.log('results', results);
-    if(error) {
-      // throw error;
-      res.json({status: 1, msg: '有错误发生', data: results})
-    } else {
-      res.json({status: 0, data: results})
-    }
-  });
+  conn.pool(sql, (result) => {
+    res.json(result)
+  })
 })
 // jubi
 router.get('/jubi/trends', function(req, res){

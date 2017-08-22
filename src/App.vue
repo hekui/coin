@@ -5,6 +5,7 @@
       <el-button @click="navHandle('btc114')" :type="nav === 'btc114' ? 'primary' : ''">BTC/LTC行情(btc114)</el-button>
       <el-button @click="dialogTradeListVisible = true">我的现有资产</el-button>
       <el-button @click="showTradeEdit">添加交易</el-button>
+      <el-button @click="showCoinIntro">币种介绍</el-button>
     </div>
     <div>
       <el-dialog title="持有币" size="large" :visible.sync="dialogTradeListVisible">
@@ -15,8 +16,9 @@
         </p>
         <el-table
           :data="myTradeList"
+          :default-sort = "{prop: 'buy_time', order: 'ascending'}"
           style="width: 100%">
-          <el-table-column property="buy_time" label="购入日期" width="120" :formatter="formatDate"></el-table-column>
+          <el-table-column property="buy_time" sortable label="购入日期" width="120" :formatter="formatDate"></el-table-column>
           <el-table-column sortable property="name" label="币种">
             <template scope="scope">
               {{scope.row.name}} <span class="gray">{{scope.row.enName.toString().toUpperCase()}}</span>
@@ -67,10 +69,14 @@ export default {
   },
   created () {
     this.nav = this.$route.path.slice(1)
+    this.getCoin()
     // this.initCoin()
     this.$store.dispatch('GET_USER_TRADE_LIST')
   },
   methods: {
+    getCoin: function () {
+      this.$store.dispatch('GET_COIN_LIST')
+    },
     initCoin: function () {
       this.$store.commit('SET_CONINCNNAME')
     },
@@ -79,6 +85,9 @@ export default {
         target: 'dialogTradeListVisible',
         data: true
       })
+    },
+    showCoinIntro: function () {
+      this.$router.push('coin')
     },
     navHandle: function (type) {
       this.nav = type

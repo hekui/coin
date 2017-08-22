@@ -29,6 +29,9 @@ const SET_COINVC_MARKET = 'SET_COINVC_MARKET'
 const GET_USER_TRADE_LIST = 'GET_USER_TRADE_LIST'
 const SET_USER_TRADE_LIST = 'SET_USER_TRADE_LIST'
 
+// coin
+const GET_COIN_LIST = 'GET_COIN_LIST'
+
 function getCoin (dataSource, coinEnName) {
   let result = {}
   if (dataSource === undefined) return result
@@ -101,7 +104,8 @@ export default new Vuex.Store({
     // coinvc market
     coinvcMarket: [],
     // user
-    dialogTradeListVisible: false
+    dialogTradeListVisible: false,
+    dialogCoinEditVisible: false
   },
   getters: {
     getMarket: state => {
@@ -377,6 +381,13 @@ export default new Vuex.Store({
         console.log('/api/user/trade_list:')
         console.log(res)
         commit('SET_USER_TRADE_LIST', res.data)
+      })
+    },
+    // coinList
+    [GET_COIN_LIST] ({commit}, params) {
+      return api.get('/api/coins').then(res => {
+        console.log('/api/coins:')
+        console.log(res)
       })
     }
   }
