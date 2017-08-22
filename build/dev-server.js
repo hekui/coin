@@ -9,7 +9,8 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var serverApi = require('../server/api')
+var bodyParser = require('body-parser');
+var serverApi = require('../server/api/')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -25,6 +26,8 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
+
+app.use(bodyParser.json()); // for parsing application/json
 
 // serverApi
 app.use('/api', serverApi)

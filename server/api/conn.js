@@ -15,16 +15,13 @@ function connPool(sql, callback){
         console.log('---error:sql query------------------------------------------------------');
         console.log('sql:', sql);
         throw error;
-        callback({
+        callback(error, {
           status: 1,
           msg: '有sql查询错误发生。',
           data: results
         })
       } else {
-        callback({
-          status: 0,
-          data: results
-        })
+        callback(null, results)
       }
     });
   })

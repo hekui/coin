@@ -3,21 +3,21 @@ var router = express.Router();
 var request = require('request');
 var conn = require('./conn')
 
+var coinRouter = require('./coin')
 
-// 路由配置
-// coins
-router.get('/coins', (req, res) => {
-  let sql = 'select id,name,enName from coin_list order by id asc'
-  conn.pool(sql, (result) => {
-    res.json(result)
-  })
-})
+router.use(coinRouter)
 
 // tradeList
 router.get('/user/trade_list', function(req, res){
   let sql = 'select * from v_user_trade_list where status = 1 order by buy_time asc'
-  conn.pool(sql, (result) => {
-    res.json(result)
+  conn.pool(sql, (error, result) => {
+    if(error){
+      res.json(result)
+    }
+    res.json({
+      status: 0,
+      data: result
+    })
   })
 })
 // jubi

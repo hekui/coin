@@ -30,7 +30,9 @@ const GET_USER_TRADE_LIST = 'GET_USER_TRADE_LIST'
 const SET_USER_TRADE_LIST = 'SET_USER_TRADE_LIST'
 
 // coin
-const GET_COIN_LIST = 'GET_COIN_LIST'
+const COINS_LIST_GET = 'COINS_LIST_GET'
+const COINS_EDIT = 'COINS_EDIT'
+const COINS_DELETE = 'COINS_DELETE'
 
 function getCoin (dataSource, coinEnName) {
   let result = {}
@@ -45,6 +47,7 @@ function getCoin (dataSource, coinEnName) {
 
 export default new Vuex.Store({
   state: {
+    coins: [],
     coinCnName: {},
     coinDic: [],
     chosenCoinList: [],
@@ -384,10 +387,31 @@ export default new Vuex.Store({
       })
     },
     // coinList
-    [GET_COIN_LIST] ({commit}, params) {
+    [COINS_LIST_GET] ({commit}, params) {
       return api.get('/api/coins').then(res => {
         console.log('/api/coins:')
         console.log(res)
+        commit('SET', {
+          target: 'coins',
+          data: res.data
+        })
+      })
+    },
+    [COINS_EDIT] ({commit, dispatch}, params) {
+      return api.post('/api/coins', params).then(res => {
+        if (params.id === '') {
+          dispatch('COINS_LIST_GET')
+        }
+        return res
+      }, res => {
+        return res
+      })
+    },
+    [COINS_DELETE] ({commit, dispatch}, ID) {
+      return api.delete(`/api/coins/${ID}`).then(res => {
+        dispatch('COINS_LIST_GET')
+      }, res => {
+        return res
       })
     }
   }

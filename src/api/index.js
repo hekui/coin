@@ -20,18 +20,17 @@ class Api {
           method: method,
           url: apiContext + path,
           // timeout: 4500,
-          data: {
-            firstName: 'Fred',
-            lastName: 'Flintstone'
-          }
+          data: data
         }).then(res => {  // axios[method](apiContext + path, data)
           // console.log('request:', 'get', apiContext + path)
-          // console.log('res', res)
+          console.log('res', res)
           if (res.status === 200) {
-            resolve(res.data)
-          } else {
-            Message({type: 'error', message: res.data.data})
-            reject(res.data)
+            // if (res.data && res.data.status === 0) {
+            if (res.data) {
+              resolve(res.data)
+            } else {
+              reject(res.data)
+            }
           }
         }).catch(error => {
           console.log('error.response', error.response)

@@ -5,7 +5,7 @@
       <el-button @click="navHandle('btc114')" :type="nav === 'btc114' ? 'primary' : ''">BTC/LTC行情(btc114)</el-button>
       <el-button @click="dialogTradeListVisible = true">我的现有资产</el-button>
       <el-button @click="showTradeEdit">添加交易</el-button>
-      <el-button @click="showCoinIntro">币种介绍</el-button>
+      <el-button @click="navHandle('coin')" :type="nav === 'coin' ? 'primary' : ''">币种管理</el-button>
     </div>
     <div>
       <el-dialog title="持有币" size="large" :visible.sync="dialogTradeListVisible">
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getCoin: function () {
-      this.$store.dispatch('GET_COIN_LIST')
+      this.$store.dispatch('COINS_LIST_GET')
     },
     initCoin: function () {
       this.$store.commit('SET_CONINCNNAME')
@@ -85,9 +85,6 @@ export default {
         target: 'dialogTradeListVisible',
         data: true
       })
-    },
-    showCoinIntro: function () {
-      this.$router.push('coin')
     },
     navHandle: function (type) {
       this.nav = type

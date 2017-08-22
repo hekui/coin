@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <el-dialog title="添加交易" size="tiny" :beforeClose="closeTradeEdit" :visible.sync="dialogTradeListVisible">
+    <el-dialog title="添加交易" size="tiny" :beforeClose="closeTradeEdit" :visible="dialogTradeListVisible">
       <el-form ref="form" :model="form" label-width="80px" label-suffix=":">
         <el-form-item label="交易所">
           <el-select v-model="form.market">
