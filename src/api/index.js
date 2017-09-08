@@ -19,11 +19,11 @@ class Api {
         axios({
           method: method,
           url: apiContext + path,
-          // timeout: 4500,
+          timeout: 4800,
           data: data
         }).then(res => {  // axios[method](apiContext + path, data)
           // console.log('request:', 'get', apiContext + path)
-          console.log('res', res)
+          // console.log('res', res)
           if (res.status === 200) {
             // if (res.data && res.data.status === 0) {
             if (res.data) {
@@ -33,8 +33,8 @@ class Api {
             }
           }
         }).catch(error => {
-          console.log('error.response', error.response)
-          console.log('error.request', error.request)
+          // console.log('error.response', error.response)
+          // console.log('error.request', error.request)
           if (error.response) {
             Message({type: 'error', message: error.response.msg})
           } else {

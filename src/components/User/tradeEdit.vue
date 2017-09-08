@@ -11,7 +11,7 @@
         <el-form-item label="币种">
           <el-select v-model="form.coinId" filterable placeholder="请选择">
             <el-option
-              v-for="(val, key) in coinCnName"
+              v-for="(val, key) in coinsCnName"
               :key="key"
               :label="key"
               :value="key">
@@ -67,8 +67,7 @@ export default {
   computed: {
     ...mapState({
       dialogTradeListVisible: 'dialogTradeListVisible',
-      coinCnName: 'coinCnName',
-      coinDicList: 'coinDic'
+      coinsCnName: 'coinsCnName'
     })
   },
   methods: {
@@ -81,7 +80,7 @@ export default {
     submitTradeEdit () {
       // this.submitLoading = true
       console.log(JSON.stringify(this.form))
-      // this.$store.dispatch('', this.form).then(res => {
+      // this.$store.dispatch('TRADE_ADD', this.form).then(res => {
       //   this.submitLoading = false
       //   this.$store.commit('SET', {
       //     target: 'dialogTradeListVisible',

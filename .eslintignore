@@ -1,2 +1,3 @@
 build/*.js
 config/*.js
+src/static/ueditor1_4_3_3/**/*.js

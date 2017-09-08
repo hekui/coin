@@ -4,8 +4,29 @@ var request = require('request');
 var conn = require('./conn')
 
 var coinRouter = require('./coin')
-
 router.use(coinRouter)
+
+var newsRouter = require('./news')
+router.use(newsRouter)
+
+var marketRouter = require('./market')
+router.use(marketRouter)
+
+
+// 蜘蛛爬币。
+var spiderCoins = require('../ticker/coins')
+router.get('/spider/coins', (req, res) => {
+  spiderCoins.init()
+  res.json({
+    status: 0,
+    data: [],
+    msg: '已经执行'
+  })
+})
+spiderCoins.init()
+setInterval(function(){
+  spiderCoins.init()
+}, 1000 * 60 * 60 * 24) // 每天执行
 
 // tradeList
 router.get('/user/trade_list', function(req, res){
@@ -56,7 +77,12 @@ router.get('/jubi/allcoin', function(req, res){
 })
 // btc9
 router.get('/btc9/allicon', function(req, res){
-  request('https://www.btc9.com/Index/CurrencyList.html', function(error, response, body){
+  request({
+    url: 'https://www.btc9.com/Index/CurrencyList.html',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+    }
+  }, function(error, response, body){
     // console.log('error', error);
     // console.log('response', response);
     if(!error && response.statusCode === 200){
@@ -68,6 +94,8 @@ router.get('/btc9/allicon', function(req, res){
     }
   })
 })
+
+// btc114
 router.get('/btc114/market', function(req, res){
   request('http://www.btc114.com/api/ticker.js', function(error, response, body){
     if(!error && response.statusCode === 200){
@@ -79,6 +107,7 @@ router.get('/btc114/market', function(req, res){
     }
   })
 })
+
 // okcoin
 router.get('/okcoin/allicon', function(req, res){
   let url = {
@@ -128,7 +157,9 @@ router.get('/okcoin/allicon', function(req, res){
 
 // coinvc
 router.get('/coinvc/market', function(req, res){
-  request('https://api2.coinvc.com/api/v2/market/tickers', function(error, response, body){
+  //https://api.coinvc.com/api/v2/market/tickers 官网
+  //https://api2.coinvc.com/api/v2/market/tickers api
+  request('https://api.coinvc.com/api/v2/market/tickers', function(error, response, body){
     if(!error && response.statusCode === 200){
       res.format({
         'application/json': function(){

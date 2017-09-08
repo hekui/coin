@@ -1,20 +1,17 @@
 <template lang="html">
   <div>
     <h3>币种管理</h3>
-    <p>
-      <!-- 查询：<el-select v-model="chosenCoinName" @change="changeChosenCoin" filterable placeholder="请选择">
-        <el-option
-          v-for="item in coins"
-          :key="item.id"
-          :value="item.name">
-          <span class="fl">{{ item.name }}</span>
-          <span class="fr" style=" color: #8492a6; font-size: 13px">{{ item.enName }}</span>
-        </el-option>
-      </el-select> -->
-      <el-button @click="editCoin()">添加币种</el-button>
-    </p>
+    <div>
+      <el-form :inline="true" :model="formSearch">
+        <el-form-item label="搜索">
+          <el-input v-model="formSearch.key" placeholder="关键词"></el-input>
+        </el-form-item>
+        <el-button @click="fetchCoins">查询</el-button>
+        <el-button @click="editCoin()">添加币种</el-button>
+      </el-form>
+    </div>
     <coinEdit :coinId="coinId"></coinEdit>
-    <div class="">
+    <div>
       <el-table
        :data="coins"
        border
@@ -25,7 +22,10 @@
          prop="id" label="ID" sortable width="80">
        </el-table-column>
        <el-table-column
-         prop="name" label="名称" sortable min-width="180">
+         prop="alias" label="名称" sortable min-width="180">
+       </el-table-column>
+       <el-table-column
+         prop="name" label="中文名称" sortable min-width="180">
        </el-table-column>
        <el-table-column
          prop="enName" label="英文名称" sortable min-width="170" class-name="orange">
@@ -34,7 +34,7 @@
         label="操作" min-width="150">
         <template scope="scope">
           <el-button type="primary" size="small" name="button" @click="editCoin(scope.row.id)">编辑</el-button>
-          <el-button name="button" size="small" @click="delCoin(scope.row.id)">删除</el-button>
+          <!-- <el-button name="button" size="small" @click="delCoin(scope.row.id)">删除</el-button> -->
         </template>
        </el-table-column>
       </el-table>
@@ -49,30 +49,26 @@ export default {
   data () {
     return {
       coinId: '',
-      chosenCoinName: ''
+      coins: [],
+      chosenCoinName: '',
+      formSearch: {
+        key: ''
+      }
     }
   },
   computed: {
     ...mapState({
-      'coins': function () {
-        if (this.chosenCoinName === '') {
-          return this.$store.state.coins
-        } else {
-          let result = null
-          let coins = this.$store.state.coins
-          coins.forEach(item => {
-            if (item.name === this.chosenCoinName) {
-              result = item
-            }
-          })
-          return [result]
-        }
-      }
+      globalCoins: 'coins'
     })
+  },
+  created () {
+    this.coins = this.globalCoins
   },
   methods: {
     fetchCoins () {
-      this.$store.dispatch('COINS_LIST_GET')
+      this.$store.dispatch('COINS_LIST_GET', this.formSearch).then(res => {
+        this.coins = res.data
+      })
     },
     editCoin (id = '') {
       this.coinId = id

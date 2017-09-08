@@ -3,14 +3,16 @@ let connConfig = {
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'btc'
+  database : 'btc',
+  multipleStatements: true,
+  dateStrings: true
 }
 let pool = mysql.createPool(connConfig)
 
 function connPool(sql, callback){
-  pool.getConnection((error, conn) => {
-    conn.query(sql, function (error, results, fields) {
-      conn.release();
+  pool.getConnection((error, connection) => {
+    connection.query(sql, function (error, results, fields) {
+      connection.release();
       if (error) {
         console.log('---error:sql query------------------------------------------------------');
         console.log('sql:', sql);

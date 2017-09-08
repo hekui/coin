@@ -1,4 +1,68 @@
 let coins = {
+  'BCDN': {
+    'chineseName': 'BlockCDN',
+    'englishName': 'BlockCDN',
+    'alias': 'BCDN',
+    'length': 3,
+    'state': true,
+    'index': 3,
+    'tradeFee': 0.001
+  },
+  'TNT': {
+    'chineseName': 'Tierion',
+    'englishName': 'Tierion',
+    'alias': 'TNT',
+    'length': 3,
+    'withdrawalLimit': 1,
+    'state': true,
+    'deposit': true,
+    'withdraw': true,
+    'transfer': true,
+    'trade': true,
+    'index': 3,
+    'tradeFee': 0.001,
+    'withdrawalFee': '0.5%'
+  },
+  'SIP': {
+    'chineseName': '薪付宝',
+    'englishName': 'SingPay',
+    'alias': 'SIP',
+    'length': 3,
+    'state': true,
+    'transfer': true,
+    'index': 3,
+    'tradeFee': 0.001
+  },
+  'MVC': {
+    'chineseName': '小牛链',
+    'englishName': 'Maverick System',
+    'alias': 'MVC',
+    'length': 3,
+    'state': true,
+    'transfer': true,
+    'index': 3,
+    'tradeFee': 0.001
+  },
+  'LRC': {
+    'chineseName': '路印',
+    'englishName': 'Loopring',
+    'alias': 'LRC',
+    'length': 3,
+    'state': true,
+    'transfer': true,
+    'index': 3,
+    'tradeFee': 0.001
+  },
+  'ATT': {
+    'chineseName': '智能矩阵',
+    'englishName': 'Atmatrix',
+    'alias': 'ATT',
+    'length': 3,
+    'state': true,
+    'transfer': true,
+    'index': 3,
+    'tradeFee': 0.001
+  },
   'EUC': {
     'chineseName': '艺游宝',
     'englishName': 'Enjoy Union Chain',
@@ -35,7 +99,7 @@ let coins = {
     'withdraw': true,
     'trade': true,
     'stock': false,
-    'index': 1,
+    'index': 4,
     'tradeFee': 0.001,
     'withdrawalFee': '0.5%',
     'total': 102400000,
@@ -72,11 +136,15 @@ let coins = {
     'englishName': 'Dochain',
     'alias': 'DOC',
     'length': 3,
+    'withdrawalLimit': 10,
     'state': true,
+    'deposit': true,
+    'withdraw': true,
     'transfer': true,
     'trade': true,
     'index': 10,
-    'tradeFee': 0.001
+    'tradeFee': 0.001,
+    'withdrawalFee': '0.3%'
   },
   'EOS': {
     'chineseName': 'EOS',
@@ -144,8 +212,8 @@ let coins = {
     'length': 3,
     'withdrawalLimit': 1,
     'state': true,
-    'deposit': true,
-    'withdraw': true,
+    'deposit': false,
+    'withdraw': false,
     'trade': true,
     'index': 13,
     'tradeFee': 0.001,
@@ -536,7 +604,7 @@ let coins = {
     'all': false,
     'index': 1,
     'tradeFee': 0.001,
-    'withdrawalFee': '0.0005'
+    'withdrawalFee': '0.002'
   },
   'LSK': {
     'chineseName': '应用链',
@@ -626,7 +694,7 @@ let coins = {
     'all': true,
     'index': 100,
     'tradeFee': 0.005,
-    'withdrawalFee': '0'
+    'withdrawalFee': '0.1%'
   },
   'LTC': {
     'chineseName': '莱特币',
@@ -684,7 +752,7 @@ let coins = {
     'withdraw': false,
     'trade': true,
     'observer': true,
-    'index': 2,
+    'index': 10,
     'tradeFee': 0.001,
     'withdrawalFee': '0.1%'
   },
@@ -732,7 +800,7 @@ let coins = {
     'withdraw': true,
     'transfer': true,
     'trade': true,
-    'index': 3,
+    'index': 6,
     'tradeFee': 0.001,
     'withdrawalFee': '0.1'
   },
