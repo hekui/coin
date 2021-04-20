@@ -1,4 +1,5 @@
-# bi
+# Coin
+虚拟币监测平台
 
 > A Vue.js project
 
